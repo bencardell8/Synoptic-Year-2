@@ -15,6 +15,10 @@ server.get("/login", (req,res) => {
     res.sendFile(__dirname + "/static/login.html")
 })
 
+server.get("/account", (req,res) => {
+    res.sendFile(__dirname + "/static/view-account.html")
+})
+
 
 
 
