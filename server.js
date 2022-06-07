@@ -22,4 +22,6 @@ server.get("/login", (req,res) => {
 
 
 
-server.listen(port, ()=> console.log('listening'))
+server.listen(port, ()=> {
+    console.log(`Listening to http://localhost:${port}`)
+}); 
