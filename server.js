@@ -8,7 +8,11 @@ server.use(express.static(__dirname));
 server.use(express.urlencoded({ extended: true}))
 
 server.get("/", (req,res) => {
-    res.sendFile(__dirname + "/static/signUp.html")
+    res.sendFile(__dirname + "/static/signup.html")
+})
+
+server.get("/login", (req,res) => {
+    res.sendFile(__dirname + "/static/login.html")
 })
 
 
