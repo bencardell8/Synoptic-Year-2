@@ -18,8 +18,8 @@ body {
 }
 
 .container {
-    width: 400px;
-    max-width: 400px;
+    width: 1000px;
+    max-width: 1000px;
     margin: 1rem;
     padding: 2rem;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
@@ -36,6 +36,8 @@ body {
 .text {
     text-align: center;
     color: #b6b1b1;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 19px;
 }
 
 .p {
@@ -59,42 +61,6 @@ body {
     background: #1151c9;
 }
 
-
-
-
-/* form data */ 
-
-.form_msg {
-    text-align: center;
-    margin-bottom: 1rem;
-}
-
-
-
-.data_input {
-    margin-bottom: 1rem;
-}
-
-.form_data {
-    display: block;
-    font-size: 1.0rem;
-    color: #eeeeee;
-    background: #333131;
-    border: 1.1px solid #4e4b4b;
-    width: 100%;
-    box-sizing: border-box;
-    transition: background 0.3s, border-color 0.3s;
-    padding: 0.75rem;
-    border-radius: var(--border-radius);
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font: 500 1rem;
-}
-
-.form_data:focus {
-    border-color: var(--primary-color);
-    background: #333131;
-    color: #eeeeee;
-}
 
 /* navbar */
 
@@ -125,40 +91,6 @@ body {
 }
 
 .navbar a.active {
-  background-color: #1b6bff;
-  color: white;
-}
-
-
-/* inner navbar */
-
-.innernavbar{
-    overflow: hidden;
-    background-color: #333131;
-    top: 50px;
-    width: 100%;
-    top: 0px;
-}
-  
-.innernavbar a {
-  float: center;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-  padding: 1rem 2rem;
-  border-radius: var(--border-radius);
-  border-bottom: 1px solid #555;
-}
-
-
-.innernavbar a:hover {
-  background-color: #1151c9;
-  color: white;
-}
-
-.innernavbar a.active {
   background-color: #1b6bff;
   color: white;
 }

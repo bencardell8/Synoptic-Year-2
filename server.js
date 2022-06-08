@@ -15,12 +15,17 @@ server.get("/login", (req,res) => {
     res.sendFile(__dirname + "/static/login.html")
 })
 
-server.get("/account", (req,res) => {
-    res.sendFile(__dirname + "/static/view-account.html")
+server.get("/about", (req,res) => {
+    res.sendFile(__dirname + "/static/about.html")
 })
 
+server.get("/account", (req,res) => {
+    res.sendFile(__dirname + "/static/account-info.html")
+})
 
-
+server.get("/editaccount", (req,res) => {
+    res.sendFile(__dirname + "/static/account-edit.html")
+})
 
 
 
