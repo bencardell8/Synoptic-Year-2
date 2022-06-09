@@ -3,11 +3,11 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/static/account-style.css">
+        <link rel="stylesheet" type="text/css"" href="static/account-style.css">
         <title>Account Create Page</title>
     </head>
     <body>
-        <div class="container"> 
+        <div class="container">
             <form class="form" id="signup">
                 <h1 class="title">Create Account</h1>
                 <div class="form_msg"></div>
@@ -23,9 +23,9 @@
                 <button class="button" type="submit" id="signup" onclick="passwordComplexity();validatePasswords();validateEmail()">Sign-up</button>
                 <p class="text">
                     Have an account?
-                    <a class="link" href="login.html" id="LoginAccount">Login</a>
+                    <a class="link" href="/login" id="LoginAccount">Login</a>
                 </p>
         </div>
-        <script src="/static/validation.js"></script>
+        <script src="static/validation.js"></script>
     </body>
 </html>
