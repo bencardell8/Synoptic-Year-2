@@ -8,14 +8,14 @@
     </head>
     <body>
         <div class="container">
-            <form class="form" id="signup">
+            <form class="form" id="signup" method="post">
                 <h1 class="title">Create Account</h1>
                 <div class="form_msg"></div>
                 <div class="data_input">
-                    <input type="text" id="email" class="form_data" autofocus placeholder="Email" required>
+                    <input type="text" id="email" name="email" class="form_data" autofocus placeholder="Email" required>
                 </div>
                 <div class="data_input">
-                    <input type="password" id="password" class="form_data" autofocus placeholder="Password" required>
+                    <input type="password" name="password" id="password" class="form_data" autofocus placeholder="Password" required>
                 </div>
                 <div class="data_input">
                     <input type="password" id="confirm_password" class="form_data" autofocus placeholder="Confirm Password" required>

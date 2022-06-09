@@ -11,6 +11,15 @@ server.get("/", (req,res) => {
     res.sendFile(__dirname + "/static/signup.html")
 })
 
+server.post("/", (req, res) => {
+    let email = req.body.email
+    let password = req.body.password
+    res.setHeader('Content-type','text/html')
+
+    console.log("Data has been saved: Email = " + email + ", Password = " + password)
+    res.redirect("/about")
+})
+
 server.get("/login", (req,res) => {
     res.sendFile(__dirname + "/static/login.html")
 })
