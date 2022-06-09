@@ -1,19 +1,12 @@
 var password = document.getElementById("password")
 
-// TODO:
-/* Add functionality to passwordComplexity() to check for number */
-
 function passwordComplexity() {
   if (password.value.length < 7) {
-    password.setCustomValidity("Password not complex enough. Must contain at least 7 characters and 1 number.");
+    password.setCustomValidity("Password not complex enough. Must contain at least 7 characters.");
   } else {
     password.setCustomValidity('');
   }
 }
-
-password.onchange = passwordComplexity;
-password.onkeyup = passwordComplexity;
-
 
 var confirm_password = document.getElementById("confirm_password");
 
@@ -25,10 +18,6 @@ function validatePasswords() {
   }
 }
 
-password.onchange = validatePasswords;
-confirm_password.onkeyup = validatePasswords;
-
-
 var email = document.getElementById("email")
 
 function validateEmail() {
@@ -38,6 +27,3 @@ function validateEmail() {
         email.setCustomValidity('')
     }
 }
-
-email.onchange = validateEmail;
-email.onkeyup = validateEmail;

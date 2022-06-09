@@ -45,6 +45,10 @@ server.get("/account", (req,res) => {
     res.sendFile(__dirname + "/static/account-info.html")
 })
 
+server.get("/contact", (req,res) => {
+    res.sendFile(__dirname + "/static/contact.html")
+})
+
 server.get("/editaccount", (req,res) => {
     res.sendFile(__dirname + "/static/account-edit.html")
 })
