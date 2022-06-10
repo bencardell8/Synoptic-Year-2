@@ -53,6 +53,41 @@ server.get("/editaccount", (req,res) => {
     res.sendFile(__dirname + "/static/account-edit.html")
 })
 
+// START
+// ADDED 10/06/2022
+// Basic post method for saving user form details to postgres
+// May have bugs or security issues
+server.post("/saveUser", (req,res) => {
+    const client = new Client({
+        user: "postgres",
+        host: "localhost",
+        database: "synopticDB",
+        password: "password",
+        port: 5432,
+    });
+
+    client.connect();
+
+    const insertData = `INSERT INTO users (email, password)
+                        VALUES ('${req.body.email}', '${req.body.password}')`;
+
+    client.query(insertData, (err, res) => {
+        if (err) {
+            console.error(err);
+            console.log("Error likely caused by duplicate email.")
+            return;
+        }
+        console.log('Data saved to database.');
+        client.end();
+    });
+
+    /* add code here to send user to their account page? */
+})
+// END
+
+
+
+
 /*server.post("/load_from_db", function(req,res){
     var body = ""
     req.on("data", function(data){
