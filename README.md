@@ -6,3 +6,4 @@
 - pg
 - nodemon
 - express
+- ejs
