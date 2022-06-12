@@ -94,6 +94,12 @@ body {
     color: #b6b1b1
 }
 
+.errortext {
+    text-align: center;
+    color: #ff0000;
+
+}
+
 .link {
     color: var(--secondary-color)
 }

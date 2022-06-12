@@ -8,11 +8,29 @@ const {Client} = require ('pg')
 server.use(bodyParser.urlencoded({ extended: false}))
 server.use(express.static(__dirname));
 server.use(express.urlencoded({ extended: true}))
+server.set("view engine", "ejs");
+
+/*
+const startAuthentication = require('./passport_auth')
+const passport = require('passport')
+startAuthentication(passport)
+*/
+
 
 server.get("/", (req,res) => {
-    res.sendFile(__dirname + "/static/signup.html")
+    res.render('signup.ejs', {error: ""});
 })
 
+server.get("/login", (req,res) => {
+    res.render('login.ejs', {error: ""});
+})
+
+
+server.get("/account", (req,res) => {
+    res.render('account-info.ejs', {error: ""});
+})
+
+/*
 server.post("/", (req, res) => {
     let email = req.body.email
     let password = req.body.password
@@ -32,19 +50,20 @@ server.post("/", (req, res) => {
 
     res.redirect("/about")
 })
-
+*/
+/*
 server.get("/login", (req,res) => {
     res.sendFile(__dirname + "/static/login.html")
 })
-
+*/
 server.get("/about", (req,res) => {
     res.sendFile(__dirname + "/static/about.html")
 })
-
+/*
 server.get("/account", (req,res) => {
     res.sendFile(__dirname + "/static/account-info.html")
 })
-
+*/
 server.get("/contact", (req,res) => {
     res.sendFile(__dirname + "/static/contact.html")
 })
@@ -53,11 +72,9 @@ server.get("/editaccount", (req,res) => {
     res.sendFile(__dirname + "/static/account-edit.html")
 })
 
-// START
-// ADDED 10/06/2022
-// Basic post method for saving user form details to postgres
-// May have bugs or security issues
+
 server.post("/saveUser", (req,res) => {
+
     const client = new Client({
         user: "postgres",
         host: "localhost",
@@ -68,22 +85,73 @@ server.post("/saveUser", (req,res) => {
 
     client.connect();
 
+        
     const insertData = `INSERT INTO users (email, password)
-                        VALUES ('${req.body.email}', '${req.body.password}')`;
+                VALUES ('${req.body.email}', '${req.body.password}')`;
 
-    client.query(insertData, (err, res) => {
+    client.query(insertData, (err) => {
         if (err) {
             console.error(err);
             console.log("Error likely caused by duplicate email.")
-            return;
+            client.end();
+            res.render('signup.ejs', {error: `Error: Email '${req.body.email}' already registered.`})
+
+        } else {
+            console.log('Data saved to database.');
+            client.end();
+            res.redirect("/contact")
         }
-        console.log('Data saved to database.');
-        client.end();
     });
 
-    /* add code here to send user to their account page? */
 })
-// END
+
+server.post("/loginUser", (req, res) => {
+
+    const client = new Client({
+        user: "postgres",
+        host: "localhost",
+        database: "synopticDB",
+        password: "password",
+        port: 5432,
+    });
+
+    client.connect();
+
+
+    const loginData = `SELECT * FROM users WHERE email = '${req.body.email}'
+                        AND password = '${req.body.password}'`;
+
+    console.log(loginData)
+    
+    client.query('SELECT email, password FROM users WHERE email=$1', [req.body.email], (err, result) => {
+        if (err) {
+            console.error(err);
+            console.log("Error likely caused by incorrect login details.")
+            client.end();
+            res.render('login.ejs', {error: 'Error: Incorrect login details.'})
+            /* checking if user data present in DB */
+        } if (result.rows.length > 0) {
+            /* finding the valid password for that user */
+            const checkPass = result.rows[0].password
+            /* checking if password entered matches actual password */
+            if (checkPass === req.body.password) {
+                console.log(`User ${req.body.email} logged in.`);
+                client.end();
+                res.render('account-info.ejs', {userEmail: result.rows[0].email})
+            } else {
+                client.end();
+                res.render('login.ejs', {error: 'Error: Incorrect login details.'})
+                console.log(`Invalid password for ${req.body.email}`)
+            }
+        } else {
+            client.end();
+            res.render('login.ejs', {error: 'Error: Incorrect login details.'})
+            console.log(`User ${req.body.email} not valid.`)
+
+        }
+    });
+
+})
 
 
 
