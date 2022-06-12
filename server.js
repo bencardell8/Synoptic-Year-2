@@ -81,7 +81,8 @@ server.post("/saveUser", (req,res) => {
         client.end();
     });
 
-    /* add code here to send user to their account page? */
+    res.redirect("/account")
+    
 })
 // END
 
