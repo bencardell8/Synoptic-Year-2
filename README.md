@@ -13,11 +13,12 @@
 - passport-local
 - express-session
 - express-flash
+- dotenv
 
 
 ### Install all npm modules with the following command:
 ```
-npm i pg nodemon express ejs passport passport-local express-session express-flash
+npm i pg nodemon express ejs passport passport-local express-session express-flash dotenv
 ```
 ## Running The Project
 
