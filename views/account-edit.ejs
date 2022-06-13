@@ -25,16 +25,16 @@
                 </ul>
                 <br>
                 <h1 class="title">Edit Account</h1>
-                <p class="text">Email: <%=user%></p>
-                <form class="form" id="change-password">
+                <p class="text" name="email">Email: <%=user%></p>
+                <form action="/updatePassword" class="form" id="change-password" method="post">
                     <div class="form_msg"></div>
                     <div class="data_input">
-                        <input type="password" id="new_password" class="form_data" autofocus placeholder="New Password" required>
+                        <input type="password" id="password" name="password" class="form_data" autofocus placeholder="New Password" required>
                     </div>
                     <div class="data_input">
-                        <input type="password" id="confirm_new_password" class="form_data" autofocus placeholder="Confirm New Password" required>
+                        <input type="password" id="confirm_password" name="confirm_password" class="form_data" autofocus placeholder="Confirm New Password" required>
                     </div>
-                    <button class="button" type="submit">Change password</button>
+                    <button class="button" type="submit" onclick="passwordComplexity();validatePasswords()" >Change password</button>
                 </form>
             <br><br>
         </div>

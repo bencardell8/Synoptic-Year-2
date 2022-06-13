@@ -64,6 +64,47 @@ server.get("/logout", (req,res) => {
     
 })
 
+/* post method for updating a user's password */
+server.post("/updatePassword", (req, res) => {
+
+    /* store new password */
+    let newPassword = req.body.password;
+
+    /* postgres database information */
+    const client = new Client({
+        user: "postgres",
+        host: "localhost",
+        database: "synopticDB",
+        password: "password",
+        port: 5432,
+    });
+    /* connecting to a postgres database */
+    client.connect();
+
+    /* update password query for user */
+    const updateQuery = `UPDATE users SET password = '${newPassword}'
+                    WHERE email = '${req.user.email}'`;
+
+    /* running query against database */
+    client.query(updateQuery, (err, result) =>{
+        /* print any errors to the console */
+        if(err) {
+            console.error(err);
+            client.end();
+        } else {
+            /* update user's password and log them out */
+            console.log("Updated password.")
+            client.end()
+            req.logout(req.user, err => {
+                if(err) return next(err);
+                req.flash("success_msg", "Password updated! Please log in again.")
+                res.render('login.ejs')
+            });
+        }
+    })
+})
+
+
 /* post method for a new user creating an account */
 server.post("/saveUser", (req,res) => {
 
