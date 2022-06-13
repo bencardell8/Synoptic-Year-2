@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>View Account</title>
-        <link rel="stylesheet" type="text/css"" href="/static/view-account-style.css">
+        <link rel="stylesheet" type="text/css"" href="static/view-account-style.css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
     </head>
     <div class="navbar">
@@ -20,18 +20,23 @@
         <div class="container">
             <div class="innernavbar">
                 <ul>
-                    <a class="active" href="/account">Account Details</a>
-                    <a href="/editaccount">Edit Profile</a>
+                    <a href="/account">Account Details</a>
+                    <a class="active" href="/editaccount">Edit Profile</a>
                 </ul>
                 <br>
-            <h1 class="title">Account Information</h1>
-            <p class="text">Email: <%=user%></p>
-            <p class="text">Amount invested: $</p>
-            <p class="text">Active bids: </p>
-            <p class="text">Pending bids: </p>
-            <p class="text">Cancelled bids: </p>
-            <p class="text">Completed bids: </p>
-            <br>
+                <h1 class="title">Edit Account</h1>
+                <p class="text">Email: <%=user%></p>
+                <form class="form" id="change-password">
+                    <div class="form_msg"></div>
+                    <div class="data_input">
+                        <input type="password" id="new_password" class="form_data" autofocus placeholder="New Password" required>
+                    </div>
+                    <div class="data_input">
+                        <input type="password" id="confirm_new_password" class="form_data" autofocus placeholder="Confirm New Password" required>
+                    </div>
+                    <button class="button" type="submit">Change password</button>
+                </form>
+            <br><br>
         </div>
         <script src="/static/validation.js"></script>
     </body>

@@ -10,12 +10,25 @@
         <div class="container">
             <form action="/loginUser" class="form" id="login" method="post">
                 <h1 class="title">Login</h1>
-                <p class="errortext"><%=error%></p>
+                <p class="errortext">
+                <% if (typeof errors != 'undefined') { %> <% errors.forEach(error => { %>
+                    <%= error.message %>
+                    <% }) %> <% } %>
+            
+                    <% if (messages.error) { %>
+                    <%= messages.error %>
+                    <% } %>
+                </p>
+                <p class="successtext">
+                    <% if(messages.success_msg) { %>
+                        <%= messages.success_msg %>
+                        <% } %>
+                </p>
                 <div class="data_input">
-                    <input type="text" name="email" id="email" class="form_data" autofocus placeholder="Email" required>
+                    <input type="email" name="email" id="email" class="form_data" autofocus placeholder="Email" required>
                 </div>
                 <div class="data_input">
-                    <input type="text" name="password" id="password" class="form_data" autofocus placeholder="Password" required>
+                    <input type="password" name="password" id="password" class="form_data" autofocus placeholder="Password" required>
                 </div>
                 <button class="button" type="submit">Continue</button>
                 <p class="text">

@@ -100,6 +100,12 @@ body {
 
 }
 
+.successtext {
+    text-align: center;
+    color: #00ff00;
+
+}
+
 .link {
     color: var(--secondary-color)
 }
