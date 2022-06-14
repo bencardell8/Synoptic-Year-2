@@ -39,7 +39,7 @@ server.get("/login", checkAuthenticated, (req,res) => {
 })
 
 server.get("/account", checkNotAuthenticated, (req,res) => {
-    res.render('account-info.ejs', {user: req.user.email});
+    res.render('account-info.ejs', {user: req.user.email, dollars: req.user.dollars, interest: req.user.interest});
 })
 
 server.get("/editaccount", checkNotAuthenticated , (req,res) => {
