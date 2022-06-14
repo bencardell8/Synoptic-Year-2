@@ -4,6 +4,19 @@
 
 ## Requirements
 
+### PostgresSQL
+### Table
+```
+CREATE TABLE users
+(id BIGSERIAL PRIMARY KEY NOT NULL,
+email VARCHAR(200) NOT NULL,
+password VARCHAR(200) NOT NULL,
+dollars FLOAT,
+interest FLOAT,
+UNIQUE (email));
+```
+
+
 ### Node.JS Modules Used
 - pg
 - nodemon
