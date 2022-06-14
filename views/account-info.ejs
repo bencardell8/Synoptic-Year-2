@@ -26,7 +26,7 @@
                 <br>
             <h1 class="title">Account Information</h1>
             <p class="text">Email: <b><%=user%></b></p>
-            <p class="text">Amount invested: <b>$<%=dollars%></b></p>
+            <p class="text">Amount invested: <b>$<%=(dollars).toLocaleString("en-AU", {style: "decimal", minimumFractionDigits: 2})%></b></p>
             <p class="text">Interest rate: <b><%=interest%>%</b></p>
             <br>
         </div>

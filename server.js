@@ -64,6 +64,79 @@ server.get("/logout", (req,res) => {
     
 })
 
+
+/* post method for setting amount */
+server.post("/setAmount", (req, res) => {
+
+    /* amount user wants to invest */
+    let amount = req.body.amount;
+    console.log(amount)
+
+    /* postgres database information */
+    const client = new Client({
+        user: "postgres",
+        host: "localhost",
+        database: "synopticDB",
+        password: "password",
+        port: 5432,
+    });
+    /* connecting to a postgres database */
+    client.connect();
+
+    /* sql query to set new amount */
+    const setQuery = `UPDATE users SET dollars = '${amount}'
+                    WHERE email = '${req.user.email}'`;
+
+    /* running query against database */
+    client.query(setQuery, (err) => {
+        if (err) {
+            console.log(err)
+            client.end();
+        } else {
+            console.log("Amount set.")
+            client.end()
+            res.redirect("/account")
+        }
+    })
+})
+
+/* post method for setting interest */
+server.post("/setInterest", (req, res) => {
+
+    /* amount user wants to invest */
+    let interest = req.body.interest;
+    console.log(interest)
+
+    /* postgres database information */
+    const client = new Client({
+        user: "postgres",
+        host: "localhost",
+        database: "synopticDB",
+        password: "password",
+        port: 5432,
+    });
+    /* connecting to a postgres database */
+    client.connect();
+
+    /* sql query to set new amount */
+    const setQuery = `UPDATE users SET interest = ${interest}
+                    WHERE email = '${req.user.email}'`;
+
+    /* running query against database */
+    client.query(setQuery, (err) => {
+        if (err) {
+            console.log(err)
+            client.end();
+        } else {
+            console.log("Interest set.")
+            client.end()
+            res.redirect("/account")
+        }
+    })
+})
+
+
+
 /* post method for updating a user's password */
 server.post("/updatePassword", (req, res) => {
 

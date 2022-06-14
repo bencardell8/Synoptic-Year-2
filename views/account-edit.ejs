@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>View Account</title>
+        <title>Edit Account</title>
         <link rel="stylesheet" type="text/css"" href="static/view-account-style.css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
     </head>
@@ -25,7 +25,26 @@
                 </ul>
                 <br>
                 <h1 class="title">Edit Account</h1>
-                <p class="text" name="email">Email: <b><%=user%></b></p>
+
+                <p class="text"><b>Set Amount ($)</b></p>
+                <form action="/setAmount" class="form" id="set-amount" method="post">
+                    <div class="form_msg"></div>
+                    <div class="data_input">
+                        <input type="number" step="0.01" min="0" id="amount" name="amount" class="form_data" autofocus placeholder="Set Amount" required>
+                    </div>
+                    <button class="button" type="submit">Set amount</button>
+                </form>
+                <br><br>
+                <p class="text"><b>Set Interest Rate (%)</b></p>
+                <form action="/setInterest" class="form" id="set-amount" method="post">
+                    <div class="form_msg"></div>
+                    <div class="data_input">
+                        <input type="number" step="0.01" min="0" id="interest" name="interest" class="form_data" autofocus placeholder="Set Interest Rate" required>
+                    </div>
+                    <button class="button" type="submit">Set interest</button>
+                </form>
+                <br><br>
+                <p class="text"><b>Change Password</b></p>
                 <form action="/updatePassword" class="form" id="change-password" method="post">
                     <div class="form_msg"></div>
                     <div class="data_input">
