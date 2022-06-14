@@ -11,8 +11,8 @@ CREATE TABLE users
 (id BIGSERIAL PRIMARY KEY NOT NULL,
 email VARCHAR(200) NOT NULL,
 password VARCHAR(200) NOT NULL,
-dollars FLOAT,
-interest FLOAT,
+dollars FLOAT DEFAULT 0,
+interest FLOAT DEFAULT 0,
 UNIQUE (email));
 ```
 
