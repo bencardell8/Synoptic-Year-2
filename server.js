@@ -2,8 +2,6 @@ const express = require('express')
 const server = express()
 const port = 3000
 const bodyParser = require('body-parser')
-const fs = require('fs')
-//const {Client} = require ('pg')
 const client = require("./database")
 const passport = require('passport')
 const session = require("express-session");
@@ -43,15 +41,15 @@ server.get("/account", checkNotAuthenticated, (req,res) => {
     res.render('account-info.ejs', {user: req.user.email, dollars: req.user.dollars, interest: req.user.interest});
 })
 
-server.get("/editaccount", checkNotAuthenticated , (req,res) => {
+server.get("/editaccount", checkNotAuthenticated, (req,res) => {
     res.render('account-edit.ejs', {user: req.user.email})
 })
 
-server.get("/about", checkNotAuthenticated , (req,res) => {
+server.get("/about", checkNotAuthenticated, (req,res) => {
     res.render('about.ejs')
 })
 
-server.get("/contact", checkNotAuthenticated , (req,res) => {
+server.get("/contact", checkNotAuthenticated, (req,res) => {
     res.render('contact.ejs')
 })
 
@@ -63,7 +61,7 @@ server.get("/logout", (req,res) => {
         res.render('login.ejs')
     });
     
-})
+});
 
 
 /* post method for setting amount */
@@ -71,127 +69,84 @@ server.post("/setAmount", (req, res) => {
 
     /* amount user wants to invest */
     let amount = req.body.amount;
-    console.log(amount)
-
-    /* postgres database information */
-
-    /* connecting to a postgres database */
-    //client.connect();
-
-    /* sql query to set new amount */
-    const setQuery = `UPDATE users SET dollars = '${amount}'
-                    WHERE email = '${req.user.email}'`;
+    let email = req.user.email;
 
     /* running query against database */
-    client.query(setQuery, (err) => {
+    client.query('UPDATE users SET dollars = $1 WHERE email = $2', [amount, email], (err) => {
         if (err) {
             console.log(err)
-            //client.end();
         } else {
-            console.log("Amount set.")
-            //client.end()
+            console.log(`User ${email} updated their investment amount.`)
             res.redirect("/account")
         }
-    })
-})
+    });
+});
 
 /* post method for setting interest */
 server.post("/setInterest", (req, res) => {
 
     /* amount user wants to invest */
     let interest = req.body.interest;
-    console.log(interest)
-
-    /* postgres database information */
-
-    /* connecting to a postgres database */
-    //client.connect();
-
-    /* sql query to set new amount */
-    const setQuery = `UPDATE users SET interest = ${interest}
-                    WHERE email = '${req.user.email}'`;
+    let email = req.user.email;
 
     /* running query against database */
-    client.query(setQuery, (err) => {
+    client.query('UPDATE users SET interest = $1 WHERE email = $2', [interest, email], (err) => {
         if (err) {
-            console.log(err)
-            //client.end();
+            console.log(err);
         } else {
-            console.log("Interest set.")
-            //client.end()
-            res.redirect("/account")
+            console.log(`User ${email} updated their interest rate.`);
+            res.redirect("/account");
         }
-    })
-})
-
-
+    });
+});
 
 /* post method for updating a user's password */
 server.post("/updatePassword", (req, res) => {
 
-    /* store new password */
+    /* store user's new password */
     let newPassword = req.body.password;
-
-    /* postgres database information */
-
-    /* connecting to a postgres database */
-    //client.connect();
-
-    /* update password query for user */
-    const updateQuery = `UPDATE users SET password = '${newPassword}'
-                    WHERE email = '${req.user.email}'`;
+    let email = req.user.email;
 
     /* running query against database */
-    client.query(updateQuery, (err, result) =>{
-        /* print any errors to the console */
+    client.query('UPDATE users SET password = $1 WHERE email = $2', [newPassword, email], (err) => {
         if(err) {
             console.error(err);
-            //client.end();
         } else {
             /* update user's password and log them out */
-            console.log("Updated password.")
-            //client.end()
+            console.log(`Updated password for ${email}.`)
             req.logout(req.user, err => {
                 if(err) return next(err);
                 req.flash("success_msg", "Password updated! Please log in again.")
                 res.render('login.ejs')
             });
         }
-    })
-})
+    });
+});
 
 
 /* post method for a new user creating an account */
 server.post("/saveUser", (req,res) => {
 
-    /* postgres database information */
+    /* store user's email and password */
+    let email = req.body.email;
+    let password = req.body.password
 
-
-    /* connecting to a postgres database */
-    //client.connect();
-
-    /* sql query containing user's information */
-    const insertData = `INSERT INTO users (email, password)
-                VALUES ('${req.body.email}', '${req.body.password}')`;
-
-    /* testing query against database */
-    client.query(insertData, (err) => {
+    /* running query against database */
+    client.query('INSERT INTO users (email, password) VALUES ($1, $2)', [email, password], (err) => {
         /* if the email already exists an error is displayed */
         if (err) {
             console.error(err);
-            console.log("Error likely caused by duplicate email.")
-            //client.end();
-            res.render('signup.ejs', {error: `Email '${req.body.email}' already registered.`})
+            console.log("Error likely caused by duplicate email.");
+            res.render('signup.ejs', {error: `Email '${req.body.email}' already registered.`});
         /* if the email is not present in the database, the account is added */
         } else {
-            console.log('Data saved to database.');
-            //client.end();
-            req.flash("success_msg", "Account created! Please log in.")
-            res.redirect("/login")
+            console.log('User data saved to database.');
+            req.flash("success_msg", "Account created! Please log in.");
+            res.redirect("/login");
         }
     });
 
-})
+});
 
  /* passport.js middleware for authetication requests. */
 server.post("/loginUser", passport.authenticate("local", {
@@ -220,5 +175,5 @@ function checkNotAuthenticated(req, res, next) {
 
 /* displays server address and port in console */
 server.listen(port, ()=> {
-    console.log(`Listening to http://localhost:${port}`)
+    console.log(`Listening to http://localhost:${port}`);
 }); 

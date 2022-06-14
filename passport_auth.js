@@ -7,7 +7,7 @@ const client = require("./database")
 /* function for initialisation of passport */
 function startAuthentication(passport) {
     /* show function has been executed */
-    console.log("Auth started")
+    console.log("PassportJS Authentication Running.")
 
     const authUser = (email, password, done) =>{
         /* query to check for user */
