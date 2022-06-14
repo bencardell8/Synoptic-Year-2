@@ -1,20 +1,13 @@
 const LocalStrategy = require('passport-local').Strategy
-const {Client} = require ('pg')
+const client = require("./database")
 
 /* storing database information */
-const client = new Client({
-    user: "postgres",
-    host: "localhost",
-    database: "synopticDB",
-    password: "password",
-    port: 5432,
-});
+
 
 /* function for initialisation of passport */
 function startAuthentication(passport) {
+    /* show function has been executed */
     console.log("Auth started")
-    /* connect to the database defined earlier */
-    client.connect();
 
     const authUser = (email, password, done) =>{
         /* query to check for user */

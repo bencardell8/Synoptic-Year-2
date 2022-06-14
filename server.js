@@ -3,7 +3,8 @@ const server = express()
 const port = 3000
 const bodyParser = require('body-parser')
 const fs = require('fs')
-const {Client} = require ('pg')
+//const {Client} = require ('pg')
+const client = require("./database")
 const passport = require('passport')
 const session = require("express-session");
 const flash = require("express-flash");
@@ -73,15 +74,9 @@ server.post("/setAmount", (req, res) => {
     console.log(amount)
 
     /* postgres database information */
-    const client = new Client({
-        user: "postgres",
-        host: "localhost",
-        database: "synopticDB",
-        password: "password",
-        port: 5432,
-    });
+
     /* connecting to a postgres database */
-    client.connect();
+    //client.connect();
 
     /* sql query to set new amount */
     const setQuery = `UPDATE users SET dollars = '${amount}'
@@ -91,10 +86,10 @@ server.post("/setAmount", (req, res) => {
     client.query(setQuery, (err) => {
         if (err) {
             console.log(err)
-            client.end();
+            //client.end();
         } else {
             console.log("Amount set.")
-            client.end()
+            //client.end()
             res.redirect("/account")
         }
     })
@@ -108,15 +103,9 @@ server.post("/setInterest", (req, res) => {
     console.log(interest)
 
     /* postgres database information */
-    const client = new Client({
-        user: "postgres",
-        host: "localhost",
-        database: "synopticDB",
-        password: "password",
-        port: 5432,
-    });
+
     /* connecting to a postgres database */
-    client.connect();
+    //client.connect();
 
     /* sql query to set new amount */
     const setQuery = `UPDATE users SET interest = ${interest}
@@ -126,10 +115,10 @@ server.post("/setInterest", (req, res) => {
     client.query(setQuery, (err) => {
         if (err) {
             console.log(err)
-            client.end();
+            //client.end();
         } else {
             console.log("Interest set.")
-            client.end()
+            //client.end()
             res.redirect("/account")
         }
     })
@@ -144,15 +133,9 @@ server.post("/updatePassword", (req, res) => {
     let newPassword = req.body.password;
 
     /* postgres database information */
-    const client = new Client({
-        user: "postgres",
-        host: "localhost",
-        database: "synopticDB",
-        password: "password",
-        port: 5432,
-    });
+
     /* connecting to a postgres database */
-    client.connect();
+    //client.connect();
 
     /* update password query for user */
     const updateQuery = `UPDATE users SET password = '${newPassword}'
@@ -163,11 +146,11 @@ server.post("/updatePassword", (req, res) => {
         /* print any errors to the console */
         if(err) {
             console.error(err);
-            client.end();
+            //client.end();
         } else {
             /* update user's password and log them out */
             console.log("Updated password.")
-            client.end()
+            //client.end()
             req.logout(req.user, err => {
                 if(err) return next(err);
                 req.flash("success_msg", "Password updated! Please log in again.")
@@ -182,16 +165,10 @@ server.post("/updatePassword", (req, res) => {
 server.post("/saveUser", (req,res) => {
 
     /* postgres database information */
-    const client = new Client({
-        user: "postgres",
-        host: "localhost",
-        database: "synopticDB",
-        password: "password",
-        port: 5432,
-    });
+
 
     /* connecting to a postgres database */
-    client.connect();
+    //client.connect();
 
     /* sql query containing user's information */
     const insertData = `INSERT INTO users (email, password)
@@ -203,12 +180,12 @@ server.post("/saveUser", (req,res) => {
         if (err) {
             console.error(err);
             console.log("Error likely caused by duplicate email.")
-            client.end();
+            //client.end();
             res.render('signup.ejs', {error: `Email '${req.body.email}' already registered.`})
         /* if the email is not present in the database, the account is added */
         } else {
             console.log('Data saved to database.');
-            client.end();
+            //client.end();
             req.flash("success_msg", "Account created! Please log in.")
             res.redirect("/login")
         }
