@@ -37,8 +37,24 @@ body {
     text-align: center;
     color: #b6b1b1;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 1.5rem;
+    font-size: 19px;
 }
+
+.data {
+    display: block;
+    font-size: 1.0rem;
+    color: #eeeeee;
+    background: #333131;
+    width: 100%;
+    box-sizing: border-box;
+    transition: background 0.3s, border-color 0.3s;
+    padding: 0.75rem;
+    border-radius: var(--border-radius);
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font: 500 1rem;
+    text-align: center;
+}
+
 
 .p {
     color: #b6b1b1;

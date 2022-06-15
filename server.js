@@ -1,6 +1,6 @@
 const express = require('express')
 const server = express()
-const port = 3000
+const port = 3001
 const bodyParser = require('body-parser')
 const client = require("./database")
 const passport = require('passport')
@@ -35,6 +35,10 @@ server.get("/", checkAuthenticated, (req,res) => {
 
 server.get("/login", checkAuthenticated, (req,res) => {
     res.render('login.ejs');
+})
+
+server.get("/market", checkNotAuthenticated, (req,res) => {
+    res.render('market.ejs')
 })
 
 server.get("/account", checkNotAuthenticated, (req,res) => {

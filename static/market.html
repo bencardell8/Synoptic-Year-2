@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="about-style.css">
+        <title>Market</title>
+    </head>
+
+    <div class="navbar">
+        <ul>
+            <a href="/account"><i class="fa fa-user-o" aria-hidden="true"></i> My Account</a>
+            <a href="#market"><i class="fa fa-line-chart" aria-hidden="true"></i> Market</a>
+            <a href="/contact"><i class="fa fa-question-circle" aria-hidden="true"></i> Contact</a>
+            <a class="active" href="/about"><i class="fa fa-info" aria-hidden="true"></i> About</a>
+            <a style="float:right" href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Log Out</a>
+        </ul>
+    </div>
+
+    <body>
+        <div class="container">
+        <form class="form" id="login"></form>
+            <h1 class="title">Project</h1>
+        
+            <p class="Project">
+                <p class="data">Current Level: 250%</p>
+                <p class="data">amount needed: $500,000</p>
+
+                <div id="hiddendiv" style="display:none">
+                    <p class="data">interest rate: 10%</p> 
+                    <p class="data">Fully Funded: Yes</p>
+                </div>
+                <button class="button" onclick="ShowDetails()">Show Details</button>
+            </p>
+            
+        </div>
+            <script src="market.js"></script>
+    </body>
+</html>
