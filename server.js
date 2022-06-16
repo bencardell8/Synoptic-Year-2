@@ -181,3 +181,4 @@ function checkNotAuthenticated(req, res, next) {
 server.listen(port, ()=> {
     console.log(`Listening to http://localhost:${port}`);
 }); 
+

@@ -4,7 +4,7 @@ const client = require("./database")
 function loadTestData() {
 
     // test user 1
-    client.query('INSERT INTO users (email, password, dollars, interest) VALUES ($1, $2, $3, $4)', ['bob@gmail.com', 'secure_password123', '500000', '1.3'], (err) => {
+    client.query('INSERT INTO users (email, password, dollars, interest) VALUES ($1, $2, $3, $4)', ['bob@gmail.com', 'secure_password123', '500', '1.3'], (err) => {
         if (err) {
             console.error(err);
             console.log("Error likely caused by duplicate email.");
@@ -14,7 +14,7 @@ function loadTestData() {
     });
 
     // test user 2
-    client.query('INSERT INTO users (email, password, dollars, interest) VALUES ($1, $2, $3, $4)', ['john@mail.net', 'password123567', '1000000', '1.0'], (err) => {
+    client.query('INSERT INTO users (email, password, dollars, interest) VALUES ($1, $2, $3, $4)', ['john@mail.net', 'password123567', '100', '1.0'], (err) => {
         if (err) {
             console.error(err);
             console.log("Error likely caused by duplicate email.");
@@ -24,7 +24,7 @@ function loadTestData() {
     });
 
     // test user 3
-    client.query('INSERT INTO users (email, password, dollars, interest) VALUES ($1, $2, $3, $4)', ['tom@gmail.com', 'qwerty12345', '750000', '1.8'], (err) => {
+    client.query('INSERT INTO users (email, password, dollars, interest) VALUES ($1, $2, $3, $4)', ['tom@gmail.com', 'qwerty12345', '7500', '1.8'], (err) => {
         if (err) {
             console.error(err);
             console.log("Error likely caused by duplicate email.");
@@ -34,7 +34,7 @@ function loadTestData() {
     });
 
     // test user 4
-    client.query('INSERT INTO users (email, password, dollars, interest) VALUES ($1, $2, $3, $4)', ['steve@gmail.com', 'verysecurepassword123', '233000', '0.6'], (err) => {
+    client.query('INSERT INTO users (email, password, dollars, interest) VALUES ($1, $2, $3, $4)', ['steve@gmail.com', 'verysecurepassword123', '233', '0.6'], (err) => {
         if (err) {
             console.error(err);
             console.log("Error likely caused by duplicate email.");
@@ -45,7 +45,7 @@ function loadTestData() {
 
 
     // test user 5
-    client.query('INSERT INTO users (email, password, dollars, interest) VALUES ($1, $2, $3, $4)', ['laura@example.com', 'securepassword123', '2100000', '1.6'], (err) => {
+    client.query('INSERT INTO users (email, password, dollars, interest) VALUES ($1, $2, $3, $4)', ['laura@example.com', 'securepassword123', '210', '1.6'], (err) => {
         if (err) {
             console.error(err);
             console.log("Error likely caused by duplicate email.");
@@ -65,7 +65,7 @@ function loadTestData() {
     });
 
     // test user 7
-    client.query('INSERT INTO users (email, password, dollars, interest) VALUES ($1, $2, $3, $4)', ['chloe@testdomain.com', 'anothersecurepassword', '500000', '1.2'], (err) => {
+    client.query('INSERT INTO users (email, password, dollars, interest) VALUES ($1, $2, $3, $4)', ['chloe@testdomain.com', 'anothersecurepassword', '50', '1.2'], (err) => {
         if (err) {
             console.error(err);
             console.log("Error likely caused by duplicate email.");
@@ -75,7 +75,7 @@ function loadTestData() {
     });
 
     // test user 8
-    client.query('INSERT INTO users (email, password, dollars, interest) VALUES ($1, $2, $3, $4)', ['rob@domain.net', 'passwordthatissecure123', '659000', '0.4'], (err) => {
+    client.query('INSERT INTO users (email, password, dollars, interest) VALUES ($1, $2, $3, $4)', ['rob@domain.net', 'passwordthatissecure123', '659', '0.4'], (err) => {
         if (err) {
             console.error(err);
             console.log("Error likely caused by duplicate email.");
@@ -85,7 +85,7 @@ function loadTestData() {
     });
 
     // test user 9
-    client.query('INSERT INTO users (email, password, dollars, interest) VALUES ($1, $2, $3, $4)', ['rick@gmail.net', '1234567', '2600000', '1.4'], (err) => {
+    client.query('INSERT INTO users (email, password, dollars, interest) VALUES ($1, $2, $3, $4)', ['rick@gmail.net', '1234567', '2600', '1.4'], (err) => {
         if (err) {
             console.error(err);
             console.log("Error likely caused by duplicate email.");
@@ -95,7 +95,7 @@ function loadTestData() {
     });
 
     // test user 10
-    client.query('INSERT INTO users (email, password, dollars, interest) VALUES ($1, $2, $3, $4)', ['kate@gmail.domain', 'password1234', '1350000', '1.1'], (err) => {
+    client.query('INSERT INTO users (email, password, dollars, interest) VALUES ($1, $2, $3, $4)', ['kate@gmail.domain', 'password1234', '135', '1.1'], (err) => {
         if (err) {
             console.error(err);
             console.log("Error likely caused by duplicate email.");
